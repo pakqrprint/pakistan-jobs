@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add a Job (Admin) — Pakistan Jobs</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%230b5d3b'/><text x='32' y='42' font-size='28' text-anchor='middle' fill='%23facc15' font-family='Arial' font-weight='bold'>PJ</text></svg>">
+<meta name="robots" content="noindex, nofollow">
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#eef2f0;color:#1f2937;font-size:14px}
+a{color:#0b5d3b}
+.top{background:#052e22;color:#fff;padding:7px 12px;text-align:center;font-size:12.5px}
+header{background:#0f2a4a;color:#fff;padding:13px 14px}
+.wrap{max-width:760px;margin:0 auto;padding:0 12px}
+.headrow{display:flex;align-items:center;gap:11px}
+.logoimg{width:48px;height:48px;border-radius:10px;background:#facc15;color:#052e22;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;flex-shrink:0}
+.logo{font-size:20px;font-weight:800} .logo span{color:#facc15} .tag{font-size:12px;opacity:.9}
+.banner{background:linear-gradient(120deg,#0b5d3b,#15803d);color:#fff;border-radius:12px;padding:18px 16px;margin:16px 0 4px;text-align:center}
+.banner h1{margin:0;font-size:20px} .banner p{margin:8px 0 0;font-size:13.5px;opacity:.95;line-height:1.5}
+.card{background:#fff;border-radius:12px;padding:16px;margin:14px 0;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.card h2{margin:0 0 10px;font-size:16px;border-bottom:2px solid #0b5d3b;padding-bottom:6px}
+label{display:block;font-size:13px;font-weight:700;color:#334155;margin:10px 0 3px}
+label .req{color:#dc2626}
+input[type=text],input[type=date],input[type=url],select,textarea{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:14px;font-family:Arial,Helvetica,sans-serif;background:#fff}
+textarea{min-height:70px;resize:vertical}
+input[type=file]{width:100%;padding:9px;border:1px dashed #94a3b8;border-radius:8px;font-size:13.5px;background:#f8fafc}
+.hint{font-size:12.5px;color:#475569;margin:4px 0 0;line-height:1.5}
+.checkrow{display:flex;align-items:center;gap:8px;margin:8px 0 0;font-size:13.5px}
+.checkrow input{width:16px;height:16px}
+#photoPreview{display:none;max-width:100%;border-radius:10px;margin-top:10px;border:1px solid #e2e8f0}
+.note{background:#fef3c7;border:1px solid #facc15;padding:10px 12px;border-radius:8px;font-size:13px;margin:12px 0;line-height:1.55}
+.btn{padding:11px 18px;border-radius:8px;border:0;cursor:pointer;font-size:14px;font-weight:700;margin:6px 6px 0 0}
+.btn-green{background:#0b5d3b;color:#fff} .btn-green:hover{background:#052e22}
+.btn-white{background:#eef2f0;color:#111827}
+#errBox{display:none;background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;padding:10px 12px;border-radius:8px;font-size:13.5px;margin:12px 0;line-height:1.55}
+#msgBox{display:none;background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:12px;margin:12px 0}
+#msgBox h3{margin:0 0 8px;font-size:14px;color:#0b5d3b}
+#msgText{white-space:pre-wrap;word-wrap:break-word;font-size:13.5px;line-height:1.6;margin:0}
+#okBox{display:none;background:#f0fdf4;border:1px solid #86efac;color:#0b5d3b;padding:11px 12px;border-radius:8px;font-size:13.5px;margin:12px 0;line-height:1.6;font-weight:700}
+footer{background:#052e22;color:#fff;text-align:center;padding:16px;font-size:13px;margin-top:20px}
+@media(max-width:760px){.banner h1{font-size:18px} .btn{width:100%;margin:6px 0 0}}
+</style>
+</head>
+<body>
+<div class="top">Pakistan Jobs — Admin Only &nbsp;|&nbsp; This page is not linked on the website</div>
+<header><div class="wrap"><div class="headrow"><div class="logoimg">PJ</div><div><div class="logo">Pakistan <span>Jobs</span></div><div class="tag">Latest Govt &amp; Private Jobs 2026 — Daily Update</div></div></div></div></header>
+<div class="wrap">
+<div class="banner"><h1>Add a Job (Admin)</h1><p>Fill the job details, copy the message, and send it in the jobs chat with the ad photo.<br><span style="font-size:12.5px">Job ki details bharein, message copy karein, aur jobs wali chat mein ad ki tasveer ke saath bhej dein.</span></p></div>
+
+<div class="card">
+<h2>Job Details</h2>
+<label>Job Title <span class="req">*</span></label>
+<input type="text" id="fTitle" placeholder="e.g. PPSC Advertisement No. 13/2026 — Lecturer Jobs">
+
+<label>Department <span class="req">*</span></label>
+<input type="text" id="fDept" placeholder="e.g. Punjab Public Service Commission">
+
+<label>City <span class="req">*</span></label>
+<input type="text" id="fCity" placeholder="e.g. Lahore">
+
+<label>Province</label>
+<select id="fProv">
+<option value="">— Select —</option>
+<option>Punjab</option><option>Sindh</option><option>Khyber Pakhtunkhwa</option><option>Balochistan</option><option>Gilgit-Baltistan</option><option>Azad Jammu &amp; Kashmir</option><option>Islamabad</option><option>Federal</option>
+</select>
+
+<label>Category</label>
+<select id="fCat">
+<option value="">— Select —</option>
+<option>Govt</option><option>Commission</option><option>Testing</option><option>Bank</option><option>Police</option><option>Forces</option><option>Teaching</option><option>Health</option><option>Private</option>
+</select>
+
+<label>Salary</label>
+<input type="text" id="fSalary" placeholder="e.g. Rs. 40,000 - 120,000 / As per BPS">
+<p class="hint">Agar salary ad mein na ho to khaali chhor dein.</p>
+
+<label>Education</label>
+<input type="text" id="fEdu" placeholder="e.g. Bachelor / Master / Matric">
+
+<label>Age</label>
+<input type="text" id="fAge" placeholder="e.g. 18 - 30 years">
+
+<label>Last Date <span class="req">*</span></label>
+<input type="date" id="fDate">
+<div class="checkrow"><input type="checkbox" id="fNoDate" onchange="toggleDate()"><span>No last date (See the ad) — ad mein date nahi likhi</span></div>
+
+<label>Newspaper / Paper</label>
+<input type="text" id="fPaper" placeholder="e.g. Daily Jang / Express / Dawn">
+
+<label>Source</label>
+<input type="text" id="fSource" placeholder="e.g. NJP / PPSC / NTS">
+<p class="hint">Jis official jagah se job mili — NJP, FPSC, PPSC, NTS, ETEA ya akhbaar ka naam.</p>
+
+<label>Official Apply Link</label>
+<input type="url" id="fUrl" placeholder="e.g. https://www.ppsc.gop.pk">
+<p class="hint">Agar koi online form na ho to khaali chhor dein — postal / walk-in wali jobs ke liye link nahi hota.</p>
+
+<label>Vacant Posts (one post per line)</label>
+<textarea id="fPosts" placeholder="Lecturer (BS-17) — 5 posts&#10;Assistant (BS-16) — 2 posts"></textarea>
+
+<label>Detail / Description</label>
+<textarea id="fDetail" placeholder="Job ke baare mein mukhtasar tafseel — eligibility, quota, fee, waghera."></textarea>
+
+<label>Ad Photo</label>
+<input type="file" id="fPhoto" accept="image/*" onchange="previewPhoto()">
+<img id="photoPreview" alt="Ad photo preview">
+<p class="hint">The photo cannot be sent from this page — please attach it in the chat with the copied message.<br>Tasveer is page se nahi jayegi — copied message ke saath chat mein attach kar dein.</p>
+</div>
+
+<div id="errBox"></div>
+<div id="msgBox"><h3>Your job message (copy karke chat mein bhej dein):</h3><pre id="msgText"></pre></div>
+<div id="okBox"></div>
+
+<div class="card" style="text-align:left">
+<button class="btn btn-green" onclick="copyJob()">Copy Job Details</button>
+<button class="btn btn-white" onclick="clearForm()">Clear Form</button>
+</div>
+
+<div class="note"><b>Note:</b> This form only prepares the job message — it does not publish the job on the website. After you send the message with the ad photo in the jobs chat, the job will be added to the site and you will be told when it is live.<br><b>Note:</b> Ye form sirf job ka message banata hai — is se job seedha site par nahi lagti. Message + tasveer chat mein bhejne ke baad job site par laga di jayegi aur aap ko bata diya jayega.</div>
+</div>
+<footer>Pakistan Jobs (Admin) &nbsp;|&nbsp; Only for Sohail Abbas</footer>
+<script>
+function val(id){var el=document.getElementById(id);return el?el.value.trim():"";}
+function toggleDate(){var d=document.getElementById("fDate");var c=document.getElementById("fNoDate");if(c.checked){d.value="";d.disabled=true;}else{d.disabled=false;}}
+function previewPhoto(){
+  var f=document.getElementById("fPhoto").files[0];
+  var img=document.getElementById("photoPreview");
+  if(!f){img.style.display="none";img.src="";return;}
+  var r=new FileReader();
+  r.onload=function(e){img.src=e.target.result;img.style.display="block";};
+  r.readAsDataURL(f);
+}
+function buildMessage(){
+  var posts=val("fPosts").split("\n").map(function(x){return x.trim();}).filter(function(x){return x.length>0;});
+  var postLines=posts.length?posts.map(function(p,i){return (i+1)+". "+p;}).join("\n"):"—";
+  var lastDate=document.getElementById("fNoDate").checked?"See the ad":(val("fDate")||"See the ad");
+  var lines=[];
+  lines.push("New Job — Pakistan Jobs");
+  lines.push("");
+  lines.push("Job Title: "+val("fTitle"));
+  lines.push("Department: "+val("fDept"));
+  lines.push("City: "+val("fCity"));
+  if(val("fProv")) lines.push("Province: "+val("fProv"));
+  if(val("fCat")) lines.push("Category: "+val("fCat"));
+  if(val("fSalary")) lines.push("Salary: "+val("fSalary"));
+  if(val("fEdu")) lines.push("Education: "+val("fEdu"));
+  if(val("fAge")) lines.push("Age: "+val("fAge"));
+  lines.push("Last Date: "+lastDate);
+  if(val("fPaper")) lines.push("Newspaper: "+val("fPaper"));
+  if(val("fSource")) lines.push("Source: "+val("fSource"));
+  if(val("fUrl")) lines.push("Official Apply Link: "+val("fUrl"));
+  lines.push("Vacant Posts:");
+  lines.push(postLines);
+  if(val("fDetail")){lines.push("Detail:");lines.push(val("fDetail"));}
+  lines.push("Ad Photo: attached in chat");
+  return lines.join("\n");
+}
+function copyJob(){
+  var err=document.getElementById("errBox");
+  var missing=[];
+  if(!val("fTitle")) missing.push("Job Title");
+  if(!val("fDept")) missing.push("Department");
+  if(!val("fCity")) missing.push("City");
+  if(!val("fDate") && !document.getElementById("fNoDate").checked) missing.push("Last Date (ya 'No last date' tick karein)");
+  if(missing.length){
+    err.style.display="block";
+    err.innerHTML="<b>Please fill these fields:</b><br>"+missing.join("<br>");
+    document.getElementById("msgBox").style.display="none";
+    document.getElementById("okBox").style.display="none";
+    return false;
+  }
+  err.style.display="none";
+  var msg=buildMessage();
+  document.getElementById("msgText").textContent=msg;
+  document.getElementById("msgBox").style.display="block";
+  var done=function(){
+    var ok=document.getElementById("okBox");
+    ok.style.display="block";
+    ok.innerHTML="Copied! Now paste this message in the jobs chat and attach the ad photo.<br>Copy ho gaya! Ab ye message jobs wali chat mein paste karein aur ad ki tasveer attach karein.";
+  };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(msg).then(done,function(){fallbackCopy(msg);done();});
+  }else{
+    fallbackCopy(msg);done();
+  }
+  return true;
+}
+function fallbackCopy(text){
+  var ta=document.createElement("textarea");
+  ta.value=text;ta.style.position="fixed";ta.style.opacity="0";
+  document.body.appendChild(ta);ta.select();
+  try{document.execCommand("copy");}catch(e){}
+  document.body.removeChild(ta);
+}
+function clearForm(){
+  var ids=["fTitle","fDept","fCity","fProv","fCat","fSalary","fEdu","fAge","fDate","fPaper","fSource","fUrl","fPosts","fDetail"];
+  ids.forEach(function(id){var el=document.getElementById(id);if(el) el.value="";});
+  var nd=document.getElementById("fNoDate");nd.checked=false;
+  document.getElementById("fDate").disabled=false;
+  document.getElementById("fPhoto").value="";
+  var img=document.getElementById("photoPreview");img.style.display="none";img.src="";
+  document.getElementById("errBox").style.display="none";
+  document.getElementById("msgBox").style.display="none";
+  document.getElementById("okBox").style.display="none";
+}
+</script>
+</body>
+</html>
