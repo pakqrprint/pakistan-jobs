@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post a Job — Live | Pakistan Jobs</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%230b5d3b'/><text x='32' y='42' font-size='28' text-anchor='middle' fill='%23facc15' font-family='Arial' font-weight='bold'>PJ</text></svg>">
+<meta name="robots" content="noindex, nofollow">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#eef2f0;color:#1f2937;font-size:14px}
+a{color:#0b5d3b}
+.top{background:#052e22;color:#fff;padding:7px 12px;text-align:center;font-size:12.5px}
+header{background:#0f2a4a;color:#fff;padding:13px 14px}
+.wrap{max-width:760px;margin:0 auto;padding:0 12px}
+.headrow{display:flex;align-items:center;gap:11px}
+.logoimg{width:48px;height:48px;border-radius:10px;background:#facc15;color:#052e22;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;flex-shrink:0}
+.logo{font-size:20px;font-weight:800} .logo span{color:#facc15} .tag{font-size:12px;opacity:.9}
+.banner{background:linear-gradient(120deg,#0b5d3b,#15803d);color:#fff;border-radius:12px;padding:18px 16px;margin:16px 0 4px;text-align:center}
+.banner h1{margin:0;font-size:20px} .banner p{margin:8px 0 0;font-size:13.5px;opacity:.95;line-height:1.5}
+.card{background:#fff;border-radius:12px;padding:16px;margin:14px 0;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.card h2{margin:0 0 10px;font-size:16px;border-bottom:2px solid #0b5d3b;padding-bottom:6px}
+label{display:block;font-size:13px;font-weight:700;color:#334155;margin:10px 0 3px}
+label .req{color:#dc2626}
+input[type=text],input[type=date],input[type=url],input[type=email],input[type=password],select,textarea{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:14px;font-family:Arial,Helvetica,sans-serif;background:#fff}
+textarea{min-height:70px;resize:vertical}
+.hint{font-size:12.5px;color:#475569;margin:4px 0 0;line-height:1.5}
+.checkrow{display:flex;align-items:center;gap:8px;margin:8px 0 0;font-size:13.5px}
+.checkrow input{width:16px;height:16px}
+.note{background:#fef3c7;border:1px solid #facc15;padding:10px 12px;border-radius:8px;font-size:13px;margin:12px 0;line-height:1.55}
+.btn{padding:11px 18px;border-radius:8px;border:0;cursor:pointer;font-size:14px;font-weight:700;margin:6px 6px 0 0}
+.btn-green{background:#0b5d3b;color:#fff} .btn-green:hover{background:#052e22}
+.btn-white{background:#eef2f0;color:#111827}
+.btn:disabled{opacity:.6;cursor:wait}
+#errBox,#loginErr{display:none;background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;padding:10px 12px;border-radius:8px;font-size:13.5px;margin:12px 0;line-height:1.55}
+#okBox{display:none;background:#f0fdf4;border:1px solid #86efac;color:#0b5d3b;padding:11px 12px;border-radius:8px;font-size:13.5px;margin:12px 0;line-height:1.6;font-weight:700}
+#okBox a{font-weight:700}
+#loggedBar{display:none;background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 12px;font-size:13.5px;margin:12px 0;line-height:1.6}
+footer{background:#052e22;color:#fff;text-align:center;padding:16px;font-size:13px;margin-top:20px}
+@media(max-width:760px){.banner h1{font-size:18px} .btn{width:100%;margin:6px 0 0}}
+</style>
+</head>
+<body>
+<div class="top">Pakistan Jobs — Admin Only &nbsp;|&nbsp; This page is not linked on the website</div>
+<header><div class="wrap"><div class="headrow"><div class="logoimg">PJ</div><div><div class="logo">Pakistan <span>Jobs</span></div><div class="tag">Latest Govt &amp; Private Jobs 2026 — Daily Update</div></div></div></div></header>
+<div class="wrap">
+<div class="banner"><h1>Post a Job — Live</h1><p>Fill the form — the job goes live on the website right away.<br><span style="font-size:12.5px">Form bharein — job foran site par live ho jayegi. Login zaroori hai (aik dafa, phir browser yaad rakhega).</span></p></div>
+
+<div class="card" id="loginBox">
+<h2>Admin Login</h2>
+<p class="hint">Login with your admin account to post jobs live.<br>Apne admin account se login karein.</p>
+<label>Email</label>
+<input type="email" id="fEmail" placeholder="e.g. sohailabbasseo@gmail.com" autocomplete="username">
+<label>Password</label>
+<input type="password" id="fPass" placeholder="Admin password" autocomplete="current-password" onkeydown="if(event.key==='Enter'){doLogin();}">
+<div id="loginErr"></div>
+<button class="btn btn-green" id="loginBtn" onclick="doLogin()">Login</button>
+</div>
+
+<div id="loggedBar">Logged in as <b id="loggedEmail"></b> &nbsp; <button class="btn btn-white" style="padding:6px 12px;margin:0" onclick="doLogout()">Logout</button></div>
+
+<div id="formWrap" style="display:none">
+<div class="card">
+<h2>Job Details</h2>
+<label>Job Title <span class="req">*</span></label>
+<input type="text" id="fTitle" placeholder="e.g. PPSC Advertisement No. 13/2026 — Lecturer Jobs">
+
+<label>Department <span class="req">*</span></label>
+<input type="text" id="fDept" placeholder="e.g. Punjab Public Service Commission">
+
+<label>City <span class="req">*</span></label>
+<input type="text" id="fCity" placeholder="e.g. Lahore">
+
+<label>Province</label>
+<select id="fProv">
+<option value="">— Select —</option>
+<option>Punjab</option><option>Sindh</option><option>Khyber Pakhtunkhwa</option><option>Balochistan</option><option>Gilgit-Baltistan</option><option>Azad Jammu &amp; Kashmir</option><option>Islamabad</option><option>Federal</option>
+</select>
+
+<label>Category</label>
+<select id="fCat">
+<option value="">— Select —</option>
+<option>Govt</option><option>Commission</option><option>Testing</option><option>Bank</option><option>Police</option><option>Forces</option><option>Teaching</option><option>Health</option><option>Private</option>
+</select>
+
+<label>Salary</label>
+<input type="text" id="fSalary" placeholder="e.g. Rs. 40,000 - 120,000 / As per BPS">
+<p class="hint">Agar salary ad mein na ho to khaali chhor dein.</p>
+
+<label>Education</label>
+<input type="text" id="fEdu" placeholder="e.g. Bachelor / Master / Matric">
+
+<label>Age</label>
+<input type="text" id="fAge" placeholder="e.g. 18 - 30 years">
+
+<label>Last Date <span class="req">*</span></label>
+<input type="date" id="fDate">
+<div class="checkrow"><input type="checkbox" id="fNoDate" onchange="toggleDate()"><span>No last date (See the ad) — ad mein date nahi likhi</span></div>
+
+<label>Newspaper / Paper</label>
+<input type="text" id="fPaper" placeholder="e.g. Daily Jang / Express / Dawn">
+
+<label>Source</label>
+<input type="text" id="fSource" placeholder="e.g. NJP / PPSC / NTS">
+<p class="hint">Jis official jagah se job mili — NJP, FPSC, PPSC, NTS, ETEA ya akhbaar ka naam.</p>
+
+<label>Official Apply Link</label>
+<input type="url" id="fUrl" placeholder="e.g. https://www.ppsc.gop.pk">
+<p class="hint">Agar koi online form na ho to khaali chhor dein — postal / walk-in wali jobs ke liye link nahi hota.</p>
+
+<label>Vacant Posts (one post per line)</label>
+<textarea id="fPosts" placeholder="Lecturer (BS-17) — 5 posts&#10;Assistant (BS-16) — 2 posts"></textarea>
+
+<label>Detail / Description</label>
+<textarea id="fDetail" placeholder="Job ke baare mein mukhtasar tafseel — eligibility, quota, fee, waghera."></textarea>
+</div>
+
+<div class="note"><b>Ad Photo:</b> Please send it in the jobs chat — Muse will add it. The job goes live now without the photo.<br><b>Ad ki tasveer:</b> Chat mein bhej dein — Muse laga dega. Job tasveer ke baghair abhi live ho jayegi.</div>
+
+<div id="errBox"></div>
+<div id="okBox"></div>
+
+<div class="card" style="text-align:left">
+<button class="btn btn-green" id="postBtn" onclick="postJob()">Post Job Live</button>
+<button class="btn btn-white" onclick="clearForm()">Clear Form</button>
+</div>
+
+<div class="note"><b>Note:</b> This page publishes the job live on the website as soon as you post it. Only post real jobs from official sources.<br><b>Note:</b> Ye page job ko foran site par live kar deta hai. Sirf asli official jobs post karein.</div>
+</div>
+</div>
+<footer>Pakistan Jobs (Admin) &nbsp;|&nbsp; Only for Sohail Abbas</footer>
+<script>
+var FIREBASE_CONFIG={apiKey:"AIzaSyA2bMlKQDweXVG1H8bNHMpSj9JiE0PvJ88",authDomain:"pakistan-jobs-beb75.firebaseapp.com",databaseURL:"https://pakistan-jobs-beb75-default-rtdb.firebaseio.com",projectId:"pakistan-jobs-beb75",storageBucket:"pakistan-jobs-beb75.firebasestorage.app",messagingSenderId:"79587814584",appId:"1:79587814584:web:31acd38bdf44bbcfa0984d"};
+var fbOK=false, auth=null, db=null;
+try{
+  if(typeof firebase!=="undefined"&&firebase&&firebase.apps){
+    if(!firebase.apps.length){firebase.initializeApp(FIREBASE_CONFIG);}
+    auth=firebase.auth(); db=firebase.database(); fbOK=true;
+  }
+}catch(e){ fbOK=false; auth=null; db=null; }
+function val(id){var el=document.getElementById(id);return el?el.value.trim():"";}
+function showLogin(){document.getElementById("loginBox").style.display="block";document.getElementById("loggedBar").style.display="none";document.getElementById("formWrap").style.display="none";}
+function showForm(email){document.getElementById("loginBox").style.display="none";document.getElementById("loggedBar").style.display="block";document.getElementById("loggedEmail").textContent=email||"";document.getElementById("formWrap").style.display="block";}
+if(fbOK&&auth){
+  try{auth.onAuthStateChanged(function(u){if(u&&u.email){showForm(u.email);}else{showLogin();}});}catch(e){showLogin();}
+}else{
+  showLogin();
+  var le=document.getElementById("loginErr");le.style.display="block";le.textContent="Firebase load nahi hua — internet check kar ke page dobara kholein. / Firebase did not load — check your internet and reopen this page.";
+}
+function doLogin(){
+  var err=document.getElementById("loginErr");err.style.display="none";
+  var em=val("fEmail"), pw=document.getElementById("fPass").value;
+  if(!em||!pw){err.style.display="block";err.textContent="Email aur password dono likhein. / Please enter both email and password.";return;}
+  if(!fbOK||!auth){err.style.display="block";err.textContent="Firebase load nahi hua — internet check kar ke page dobara kholein.";return;}
+  var btn=document.getElementById("loginBtn");btn.disabled=true;btn.textContent="Logging in...";
+  var p=null;
+  try{p=auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);}catch(e){p=Promise.resolve();}
+  Promise.resolve(p).then(function(){return auth.signInWithEmailAndPassword(em,pw);}).then(function(){/* onAuthStateChanged shows the form */}).catch(function(e){
+    btn.disabled=false;btn.textContent="Login";
+    var msg="Login nahi hua — dobara try karein.";
+    if(e&&e.code){
+      if(e.code==="auth/invalid-credential"||e.code==="auth/user-not-found"||e.code==="auth/wrong-password"){msg="Galat email ya password — dobara try karein.";}
+      else if(e.code==="auth/too-many-requests"){msg="Bohat dafa galat try hui — thori der baad try karein.";}
+      else if(e.code==="auth/network-request-failed"){msg="Internet ka masla hai — connection check kar ke dobara try karein.";}
+    }
+    err.style.display="block";err.textContent=msg+" / "+(e&&e.code?e.code:"");
+  });
+}
+function doLogout(){try{if(auth){auth.signOut().catch(function(){});}}catch(e){}showLogin();}
+function toggleDate(){var d=document.getElementById("fDate");var c=document.getElementById("fNoDate");if(c.checked){d.value="";d.disabled=true;}else{d.disabled=false;}}
+function todayISO(){var d=new Date();var m=("0"+(d.getMonth()+1)).slice(-2);var day=("0"+d.getDate()).slice(-2);return d.getFullYear()+"-"+m+"-"+day;}
+function eduLevelFrom(e){var s=String(e||"").toLowerCase();if(/master|mphil|m\.phil|mba|\bms\b|m\.sc/.test(s))return "Master";if(/bachelor|graduate|\bbs\b|\bba\b|\bbsc\b|b\.sc|llb|mbbs|\bbe\b/.test(s))return "Bachelor";if(/intermediate|\bfsc\b|\bfa\b|\bics\b|hssc/.test(s))return "Inter";if(/matric|\bssc\b/.test(s))return "Matric";if(/primary/.test(s))return "Primary";return "";}
+function buildJob(){
+  var posts=val("fPosts").split("\n").map(function(x){return x.trim();}).filter(function(x){return x.length>0;});
+  return {
+    title:val("fTitle"), dept:val("fDept"), city:val("fCity"),
+    cat:val("fCat")||"Govt", salary:val("fSalary")||"As per ad",
+    edu:val("fEdu")||"As per ad", eduLevel:eduLevelFrom(val("fEdu")),
+    age:val("fAge")||"As per ad",
+    date:document.getElementById("fNoDate").checked?"":val("fDate"),
+    pub:todayISO(), paper:val("fPaper")||"Official", source:val("fSource")||"NJP.gov.pk",
+    url:val("fUrl"), img:"",
+    posts:posts.length?posts:["As per ad"],
+    detail:val("fDetail")||val("fTitle"),
+    prov:val("fProv"), live:true, liveAt:Date.now()
+  };
+}
+function postJob(){
+  var err=document.getElementById("errBox");var ok=document.getElementById("okBox");
+  err.style.display="none";ok.style.display="none";
+  var missing=[];
+  if(!val("fTitle")) missing.push("Job Title");
+  if(!val("fDept")) missing.push("Department");
+  if(!val("fCity")) missing.push("City");
+  if(!val("fDate") && !document.getElementById("fNoDate").checked) missing.push("Last Date (ya 'No last date' tick karein)");
+  if(missing.length){err.style.display="block";err.innerHTML="<b>Please fill these fields:</b><br>"+missing.join("<br>");return;}
+  if(!fbOK||!db){err.style.display="block";err.textContent="Firebase load nahi hua — page dobara kholein aur dobara try karein.";return;}
+  var job=buildJob();
+  var btn=document.getElementById("postBtn");btn.disabled=true;btn.textContent="Posting...";
+  db.ref("jobs").push(job).then(function(){
+    btn.disabled=false;btn.textContent="Post Job Live";
+    ok.style.display="block";
+    ok.innerHTML='Job live ho gayi! / Your job is now live on the website.<br><a href="https://pakqrprint.github.io/pakistan-jobs/#job-0" target="_blank">View it on the site</a> — job sab se upar nazar aayegi. (Ad photo chat mein bhej dein — Muse laga dega.)';
+    try{document.getElementById("okBox").scrollIntoView();}catch(e){}
+  }).catch(function(e){
+    btn.disabled=false;btn.textContent="Post Job Live";
+    err.style.display="block";
+    err.textContent="Post nahi hui: "+(e&&e.message?e.message:"unknown error")+" — dobara try karein.";
+  });
+}
+function clearForm(){
+  var ids=["fTitle","fDept","fCity","fProv","fCat","fSalary","fEdu","fAge","fDate","fPaper","fSource","fUrl","fPosts","fDetail"];
+  ids.forEach(function(id){var el=document.getElementById(id);if(el) el.value="";});
+  var nd=document.getElementById("fNoDate");nd.checked=false;
+  document.getElementById("fDate").disabled=false;
+  document.getElementById("errBox").style.display="none";
+  document.getElementById("okBox").style.display="none";
+}
+</script>
+</body>
+</html>

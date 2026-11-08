@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pakistan Jobs - Latest Govt & Private Jobs 2026 | Demo v29</title>
+<title>Pakistan Jobs - Latest Govt & Private Jobs 2026 | Demo v30</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%230b5d3b'/><text x='32' y='42' font-size='28' text-anchor='middle' fill='%23facc15' font-family='Arial' font-weight='bold'>PJ</text></svg>">
 <meta name="description" content="Demo: Latest Pakistan jobs from official departments and newspapers. Govt, Private, Bank, Teaching, Police and Forces jobs with last date and apply method.">
 <meta property="og:title" content="Pakistan Jobs — Latest Govt & Private Jobs 2026">
@@ -72,9 +72,11 @@ footer span{cursor:pointer;text-decoration:underline}
 #cookiebar{position:fixed;bottom:0;left:0;right:0;background:#0f2a4a;color:#fff;padding:12px;text-align:center;z-index:30;font-size:13px}
 #cookiebar button{margin-left:10px;padding:7px 14px;border:0;border-radius:8px;background:#facc15;font-weight:700;cursor:pointer}
 </style>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 </head>
 <body>
-<div class="top">DEMO v29 — Official Sources &nbsp;|&nbsp; NJP + FPSC + PPSC + KPPSC + SPSC + ETEA + NTS + Newspapers &nbsp;|&nbsp; No private aggregator name/link</div>
+<div class="top">DEMO v30 — Official Sources &nbsp;|&nbsp; NJP + FPSC + PPSC + KPPSC + SPSC + ETEA + NTS + Newspapers &nbsp;|&nbsp; No private aggregator name/link</div>
 <header><div class="wrap"><div class="headrow"><div class="logoimg"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#052e22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div><div class="logo">Pakistan <span>Jobs</span></div><div class="tag">Latest Govt &amp; Private Jobs 2026 — Daily Update</div></div></div></div></header>
 <div class="nav"><div class="wrap"><button onclick="setCat('All');window.scrollTo(0,200)">Home</button><button onclick="setCat('Govt')">Govt Jobs</button><button onclick="setCat('Private')">Private Jobs</button><button onclick="setCat('Bank')">Bank Jobs</button><button onclick="setCat('Teaching')">Teaching</button><button onclick="setCat('Police')">Police Jobs</button><button onclick="setCat('Forces')">Forces Jobs</button><button onclick="setCat('Commission')">Commission</button><button onclick="setCat('Testing')">Testing Agency</button><button onclick="openPage('about')">About</button><button onclick="openPage('privacy')">Privacy</button><button onclick="openPage('contact')">Contact</button></div></div>
 <div class="ticker"><span>BREAKING: BISP Jobs Last Date 12 Nov 2026 &nbsp;•&nbsp; Islamabad Police Last Date 15 Nov 2026 &nbsp;•&nbsp; PSCA Jobs Last Date 9 Nov 2026 &nbsp;•&nbsp; New jobs will be posted here daily &nbsp;•&nbsp;</span></div>
@@ -103,7 +105,7 @@ footer span{cursor:pointer;text-decoration:underline}
 <div class="sidebox"><h3>Categories</h3><div id="sidecats"></div></div>
 <div class="sidebox"><h3>Latest Jobs</h3><div id="sidelatest"></div></div>
 <div class="sidebox"><h3>Saved Jobs</h3><div id="sidesaved"></div></div>
-<div class="sidebox"><h3>🔥 Trending Jobs</h3><div class="slink" onclick="openJob(76)">Islamabad Police SI / ASI / Constable</div><div class="slink" onclick="openJob(75)">BISP 197 Posts (Balochistan Quota)</div><div class="slink" onclick="openJob(77)">PSCA Executive Officer Jobs</div></div>
+<div class="sidebox"><h3>🔥 Trending Jobs</h3><div class="slink" id="trendPolice" onclick="openJob(76)">Islamabad Police SI / ASI / Constable</div><div class="slink" id="trendBisp" onclick="openJob(75)">BISP 197 Posts (Balochistan Quota)</div><div class="slink" id="trendPsca" onclick="openJob(77)">PSCA Executive Officer Jobs</div></div>
 <div class="sidebox"><h3>Jobs by City</h3><div class="slink" onclick="setCity('Lahore')">Lahore Jobs</div><div class="slink" onclick="setCity('Karachi')">Karachi Jobs</div><div class="slink" onclick="setCity('Islamabad')">Islamabad Jobs</div><div class="slink" onclick="setCity('Quetta')">Quetta Jobs</div><div class="slink" onclick="setCity('Rawalpindi')">Rawalpindi Jobs</div></div>
 <div class="sidebox"><h3>Join Job Alert</h3><p style="font-size:13.5px;color:#475569">Get a WhatsApp / Email alert as soon as a new job arrives.</p><input id="alertNum" placeholder="WhatsApp number or Email" style="width:100%;padding:9px;border:1px solid #cbd5e1;border-radius:8px"><button class="btn btn-green" style="margin-top:8px;width:100%" onclick="joinAlert()">Join Alert</button></div>
 <div class="sidebox"><h3>Official Sources — Allowed to Show</h3><p style="font-size:13.5px;line-height:1.7;margin:0">NJP.gov.pk — Federal jobs<br>FPSC.gov.pk — Federal Commission<br>PPSC.gop.pk — Punjab Commission<br>KPPSC.gov.pk — KPK Commission<br>SPSC.gov.pk — Sindh Commission<br>BPSC.gob.pk — Balochistan Commission<br>ETEA.edu.pk — KPK Testing<br>NTS.org.pk — National Testing<br>PTS.org.pk — Testing Service<br><br>Newspapers: Jang, Express, Dawn, The News, Nawa-i-Waqt, Nation<br><br>Private jobs websites are not named or linked on this site.</p></div>
@@ -114,7 +116,7 @@ footer span{cursor:pointer;text-decoration:underline}
 <div id="cookiebar">This site uses cookies for a better experience. <button onclick="document.getElementById('cookiebar').style.display='none'">Accept</button></div>
 <div class="modalbg" id="modalbg"><div class="modal" id="modal"></div></div>
 <div id="adfs" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:9999;overflow:auto;text-align:center" onclick="closeAdFS()"><button class="modal-x" style="position:fixed;top:12px;right:12px" onclick="closeAdFS()">✕</button><img id="adfsimg" style="max-width:100%;height:auto;margin:52px auto 24px;display:block"></div>
-<footer>Pakistan Jobs (Demo v29) &nbsp;|&nbsp; <span onclick="openPage('about')">About Us</span> &nbsp;|&nbsp; <span onclick="openPage('privacy')">Privacy Policy</span> &nbsp;|&nbsp; <span onclick="openPage('contact')">Contact Us</span> &nbsp;|&nbsp; <span onclick="openPage('disclaimer')">Disclaimer</span> &nbsp;|&nbsp; <span onclick="openPage('terms')">Terms of Use</span><br>This is a demo file. A domain and hosting are needed to go live. AdSense approval is required.</footer>
+<footer>Pakistan Jobs (Demo v30) &nbsp;|&nbsp; <span onclick="openPage('about')">About Us</span> &nbsp;|&nbsp; <span onclick="openPage('privacy')">Privacy Policy</span> &nbsp;|&nbsp; <span onclick="openPage('contact')">Contact Us</span> &nbsp;|&nbsp; <span onclick="openPage('disclaimer')">Disclaimer</span> &nbsp;|&nbsp; <span onclick="openPage('terms')">Terms of Use</span><br>This is a demo file. A domain and hosting are needed to go live. AdSense approval is required.</footer>
 
 <script>
 var cats=["All","Govt","Private","Bank","Teaching","Police","Forces","Commission","Testing"];
@@ -243,6 +245,39 @@ function showQSugg(){var inp=document.getElementById("q"); if(!inp) return; var 
 function selectQSugg(c){var inp=document.getElementById("q"); if(inp) inp.value=c; var box=document.getElementById("qSugg"); if(box) box.style.display="none"; render();}
 function hideQSugg(){setTimeout(function(){var box=document.getElementById("qSugg"); if(box) box.style.display="none";},200);}
 for(var pi=0;pi<jobs.length;pi++){jobs[pi].prov=getProv(jobs[pi].city,jobs[pi].dept);}
+/* --- Firebase live jobs (v30) --- */
+var FIREBASE_CONFIG={apiKey:"AIzaSyA2bMlKQDweXVG1H8bNHMpSj9JiE0PvJ88",authDomain:"pakistan-jobs-beb75.firebaseapp.com",databaseURL:"https://pakistan-jobs-beb75-default-rtdb.firebaseio.com",projectId:"pakistan-jobs-beb75",storageBucket:"pakistan-jobs-beb75.firebasestorage.app",messagingSenderId:"79587814584",appId:"1:79587814584:web:31acd38bdf44bbcfa0984d"};
+var fileJobs=jobs.slice();
+var liveCount=0;
+function normTitle(t){return String(t||"").toLowerCase().replace(/\s+/g," ").trim();}
+function findJobByTitle(t){for(var i=0;i<jobs.length;i++){if(jobs[i].title===t)return i;}return -1;}
+function fixTrending(){var map=[["trendBisp","BISP Jobs 2026"],["trendPolice","Islamabad Police SI, ASI"],["trendPsca","Punjab Safe Cities Authority (PSCA) Jobs 2026"]];for(var m=0;m<map.length;m++){var el=document.getElementById(map[m][0]);if(!el)continue;var idx=-1;for(var i=0;i<jobs.length;i++){if(jobs[i].title&&jobs[i].title.indexOf(map[m][1])!==-1){idx=i;break;}}if(idx!==-1){el.setAttribute("onclick","openJob("+idx+")");}}}
+function mergeLiveJobs(data){
+if(!data||typeof data!=="object")return;
+var arr=[];
+for(var k in data){if(!Object.prototype.hasOwnProperty.call(data,k))continue;var j=data[k];if(j&&typeof j.title==="string"&&j.title.trim()){arr.push(j);}}
+if(!arr.length)return;
+arr.sort(function(a,b){return (Number(b.liveAt)||0)-(Number(a.liveAt)||0);});
+var seen={};var live=[];
+for(var i=0;i<arr.length;i++){var j=arr[i];var t=normTitle(j.title);if(seen[t])continue;seen[t]=1;
+if(j.posts&&typeof j.posts==="object"&&!Array.isArray(j.posts)){var pa=[];var keys=Object.keys(j.posts).sort(function(a,b){return a-b;});for(var q=0;q<keys.length;q++){pa.push(j.posts[keys[q]]);}j.posts=pa;}
+if(!j.posts||!j.posts.length){j.posts=["As per ad"];}else if(typeof j.posts==="string"){j.posts=[j.posts];}
+j.img=j.img||"";j.cat=j.cat||"Govt";j.salary=j.salary||"As per ad";j.edu=j.edu||"As per ad";j.age=j.age||"As per ad";j.date=j.date||"";j.pub=j.pub||"";j.paper=j.paper||"Official";j.source=j.source||"";j.url=j.url||"";j.detail=j.detail||j.title;j.prov=j.prov||getProv(j.city||"",j.dept||"");j.isOfficial=(j.url||"")!=="";j.eduLevel=j.eduLevel||"";j.live=true;live.push(j);}
+var liveTitles={};for(var i=0;i<live.length;i++){liveTitles[normTitle(live[i].title)]=1;}
+var kept=[];for(var i=0;i<fileJobs.length;i++){if(!liveTitles[normTitle(fileJobs[i].title)]){kept.push(fileJobs[i]);}}
+jobs=live.concat(kept);liveCount=live.length;
+fixTrending();renderChips();render();renderSaved();
+}
+function loadLiveJobs(){
+try{
+if(typeof firebase==="undefined"||!firebase||!firebase.database)return;
+if(!firebase.apps||!firebase.apps.length){firebase.initializeApp(FIREBASE_CONFIG);}
+var db=firebase.database();var settled=false;
+var timer=setTimeout(function(){settled=true;},4000);
+db.ref("jobs").once("value").then(function(snap){if(settled)return;settled=true;clearTimeout(timer);try{mergeLiveJobs(snap?snap.val():null);}catch(e){}}).catch(function(){if(settled)return;settled=true;clearTimeout(timer);});
+}catch(e){}
+}
+
 function daysLeft(d){if(!d) return null;var t=new Date(d+"T00:00:00");var n=new Date();n.setHours(0,0,0,0);return Math.ceil((t-n)/86400000);}
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");}
 function applySite(u){try{var s=String(u||"");var h=s.replace(/^https?:\/\//,"").split("/")[0].toLowerCase();if(h==="sites.google.com"){var seg=s.split("/view/")[1]||"";seg=seg.split("/")[0];if(seg){return seg.replace(/-/g," ").toUpperCase();}}var p=h.split(".");if(p[0]==="www"){p.shift();}while(p.length>3&&/^(cp|apply|jobs)$/.test(p[0])){p.shift();}var d=p.join(".");var f=d.split(".")[0];return f.toUpperCase()+d.slice(f.length);}catch(e){return "";}}
@@ -284,9 +319,9 @@ function shareJob(i){var j=jobs[i];var t="Job: "+j.title+" | "+j.dept+" | Last D
 function copyJob(i){var link=jobLink(i);if(navigator.clipboard){navigator.clipboard.writeText(link).then(function(){alert("Job link copied");});}else{alert(link);}}
 function shareFB(i){var j=jobs[i];window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(jobLink(i))+"&quote="+encodeURIComponent(j.title),"_blank");}
 function shareX(i){var j=jobs[i];var t=j.title+" | Last Date: "+dateLabel(j)+" "+jobLink(i);window.open("https://twitter.com/intent/tweet?text="+encodeURIComponent(t),"_blank");}
-function renderSaved(){try{var sv=JSON.parse(localStorage.getItem("savedJobs")||"[]");var box=document.getElementById("sidesaved");if(!box) return;if(!sv.length){box.innerHTML="<p style='font-size:13px;color:#475569'>No job saved yet. Open a job and tap Save Job.</p>";return;}var h="";for(var k=0;k<sv.length;k++){var n=sv[k];if(jobs[n]){h+='<div class="slink" onclick="openJob('+n+')">'+esc(jobs[n].title)+' <span style="float:right" onclick="event.stopPropagation();removeSaved('+n+')">\u2715</span></div>';}}box.innerHTML=h;}catch(e){}}
-function removeSaved(i){try{var sv=JSON.parse(localStorage.getItem("savedJobs")||"[]");var p=sv.indexOf(i);if(p!==-1){sv.splice(p,1);localStorage.setItem("savedJobs",JSON.stringify(sv));}renderSaved();}catch(e){}}
-function saveJob(i){try{var sv=JSON.parse(localStorage.getItem("savedJobs")||"[]");if(sv.indexOf(i)===-1){sv.push(i);localStorage.setItem("savedJobs",JSON.stringify(sv));renderSaved();alert("Job saved.");}else{alert("This job is already saved.");}}catch(e){alert("Job saved (Demo).");}}
+function renderSaved(){try{var sv=JSON.parse(localStorage.getItem("savedJobs")||"[]");var box=document.getElementById("sidesaved");if(!box)return;if(!sv.length){box.innerHTML="<p style='font-size:13px;color:#475569'>No job saved yet. Open a job and tap Save Job.</p>";return;}var titles=[];var migrated=false;for(var k=0;k<sv.length;k++){var t="";if(typeof sv[k]==="number"){var f=fileJobs[sv[k]];if(f&&f.title){t=f.title;migrated=true;}}else if(typeof sv[k]==="string"){t=sv[k];}if(t&&titles.indexOf(t)===-1){titles.push(t);}}if(migrated){try{localStorage.setItem("savedJobs",JSON.stringify(titles));}catch(e){}}var h="";for(var k=0;k<titles.length;k++){var n=findJobByTitle(titles[k]);if(n!==-1){h+='<div class="slink" onclick="openJob('+n+')">'+esc(jobs[n].title)+' <span style="float:right" onclick="event.stopPropagation();removeSaved('+n+')">\u2715</span></div>';}}box.innerHTML=h;}catch(e){}}
+function removeSaved(i){try{var t=(jobs[i]&&jobs[i].title)||"";if(!t)return;var sv=JSON.parse(localStorage.getItem("savedJobs")||"[]");var out=[];for(var k=0;k<sv.length;k++){var v=sv[k];if(typeof v==="number"){var f=fileJobs[v];if(f&&f.title===t){continue;}}else if(v===t){continue;}out.push(v);}localStorage.setItem("savedJobs",JSON.stringify(out));renderSaved();}catch(e){}}
+function saveJob(i){try{var t=(jobs[i]&&jobs[i].title)||"";if(!t){alert("Job saved (Demo).");return;}var sv=JSON.parse(localStorage.getItem("savedJobs")||"[]");var has=false;for(var k=0;k<sv.length;k++){if(sv[k]===t){has=true;break;}if(typeof sv[k]==="number"){var f=fileJobs[sv[k]];if(f&&f.title===t){has=true;break;}}}if(!has){sv.push(t);localStorage.setItem("savedJobs",JSON.stringify(sv));renderSaved();alert("Job saved.");}else{alert("This job is already saved.");}}catch(e){alert("Job saved (Demo).");}}
 function setCity(c){var inp=document.getElementById("q"); if(inp) inp.value=c; render(); window.scrollTo(0,200);}
 function joinAlert(){var v=document.getElementById("alertNum")?document.getElementById("alertNum").value.trim():"";if(!v){alert("Please enter a WhatsApp number or Email first");return;}alert("Job Alert joined (Demo). You will get an alert for new jobs.");}
 function openPage(p){
@@ -301,6 +336,7 @@ document.getElementById("modalbg").addEventListener("click",function(e){if(e.tar
 renderChips();render();renderSaved();
 function openFromHash(){try{var h=(window.location.hash||"");var m=h.match(/#job-(\d+)/);if(m){var n=parseInt(m[1],10);if(!isNaN(n)&&jobs[n]) openJob(n);}}catch(e){}}
 openFromHash();
+loadLiveJobs();
 </script>
 </body>
 </html>
